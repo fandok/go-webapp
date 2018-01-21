@@ -7,17 +7,17 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func main() {
+func newRouter() *mux.Router {
 	r := mux.NewRouter()
-
 	r.HandleFunc("/hello", handler).Methods("GET")
+	return r
+}
 
+func main() {
+	r := newRouter()
 	http.ListenAndServe(":8080", r)
 }
 
-// "handler" is our handler function. It has to follow the function signature of a ResponseWriter and Request type
-// as the arguments.
 func handler(w http.ResponseWriter, r *http.Request) {
-	// For this case, we will always pipe "Hello World" into the response writer
-	fmt.Fprintf(w, "Hello Word!")
+	fmt.Fprintf(w, "Hello World!")
 }
